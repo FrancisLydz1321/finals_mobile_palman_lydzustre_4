@@ -18,4 +18,7 @@ class AppTheme {
       TextStyle(fontSize: 20, fontWeight: FontWeight.bold);
 
   static const kSeeAllText = TextStyle(color: kPrimaryColor);
+
+  static final kCardTitle =
+      TextStyle(fontSize: 16, fontWeight: FontWeight.bold);
 }

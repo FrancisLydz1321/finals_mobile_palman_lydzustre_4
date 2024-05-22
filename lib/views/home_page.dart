@@ -1,14 +1,20 @@
 import 'package:finals_mobile_palman_lydzustre_4/constants/themes.dart';
+import 'package:finals_mobile_palman_lydzustre_4/controllers/product_controller.dart';
 import 'package:finals_mobile_palman_lydzustre_4/widgets/ads_banner_widget.dart';
+import 'package:finals_mobile_palman_lydzustre_4/widgets/card_widget.dart';
 import 'package:finals_mobile_palman_lydzustre_4/widgets/chip_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-class HomePage extends StatelessWidget {
+// import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+
+class HomePage extends ConsumerWidget {
   const HomePage({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final products = ref.watch(productNotifierProvider);
     return Scaffold(
       appBar: AppBar(
         backgroundColor: kSecondaryColor,
@@ -65,70 +71,30 @@ class HomePage extends StatelessWidget {
                   ),
                 ],
               ),
-              SizedBox(height: 12),
-              Container(
-                padding: const EdgeInsets.all(4),
-                // color: Colors.amber,
-                height: 290,
-                width: double.infinity,
-                child: ListView.builder(
-                  padding: const EdgeInsets.all(12),
-                  itemCount: 3,
-                  scrollDirection: Axis.horizontal,
-                  shrinkWrap: true,
-                  itemBuilder: (context, index) => Container(
-                    decoration: BoxDecoration(
-                        // color: kWhiteColor,
-                        borderRadius: BorderRadius.circular(12),
-                        boxShadow: [
-                          BoxShadow(
-                            offset: Offset(0, 6),
-                            color: kWhiteColor,
-                            blurRadius: 8,
-                            spreadRadius: 4,
-                          ),
-                        ]),
-                    margin: const EdgeInsets.all(12),
-                    // color: kWhiteColor,
-                    width: MediaQuery.of(context).size.width * .5,
-                    child: Column(
-                      children: [
-                        Expanded(
-                          child: Container(
-                            // color: kLightBackground,
-                            width: double.infinity,
-                            padding: const EdgeInsets.all(12),
-                            color: kLightBackground,
-                            child: Image.asset('assets/products/airpods.jpg'),
-                          ),
-                        ),
-                        SizedBox(
-                          height: 12,
-                        ),
-                        Container(
-                          padding: const EdgeInsets.symmetric(horizontal: 14),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              const Text('Product Name'),
-                              const Text('Product Name Description'),
-                              Row(
-                                children: [
-                                  Text('\$854'),
-                                  IconButton(
-                                    onPressed: () {},
-                                    icon: const Icon(Icons.add_circle),
-                                  ),
-                                ],
-                              )
-                            ],
-                          ),
-                        )
-                      ],
-                    ),
+              const SizedBox(height: 12),
+              // const ProductCardWidget(),
+              ProductCardWidget(productIndex: 1),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    'Featured Sales',
+                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                   ),
-                ),
-              )
+                  Text(
+                    'See All',
+                    style: AppTheme.kSeeAllText,
+                  ),
+                ],
+              ),
+
+              // MasonryGridView.builder(
+              //   physics: const NeverScrollableScrollPhysics(),
+              //   itemCount: 4,
+              //   shrinkWrap: true,
+              // gridDelegate: SliverSimpleGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2), itemBuilder: (context, index) => const SizedBox(height: 250,child: ProductCardWidget()),),
+              ProductCardWidget(productIndex: 2),
+              ProductCardWidget(productIndex: 3),
             ],
           ),
         ),
