@@ -8,6 +8,9 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 // import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+final currentIndexProvider = StateProvider<int>((ref) {
+  return 0;
+});
 
 class HomePage extends ConsumerWidget {
   const HomePage({super.key});
@@ -15,6 +18,7 @@ class HomePage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final products = ref.watch(productNotifierProvider);
+    final currentIndex = ref.watch(currentIndexProvider);
     return Scaffold(
       appBar: AppBar(
         backgroundColor: kSecondaryColor,
@@ -99,6 +103,28 @@ class HomePage extends ConsumerWidget {
           ),
         ),
       ),
+
+      // bottomNavigationBar: BottomNavigationBar(items: const [
+      //   currentIndexProvider: currentIndex ,
+      //   onTap: (value) => ref.read(currentIndexProvider.notifier).update((state) =>value),
+      //   selectedItemColor: kPrimiaryColor,
+      //   unselectedItemColor: kSecondaryColor,
+      //   BottomNavigationBarItem(
+      //     icon: Icon(Icons.home_filled),
+      //     label: 'Home',
+      //     activeIcon: Icon(Icons.home_filled),
+      //   ),
+      //   BottomNavigationBarItem(
+      //     icon: Icon(Icons.home_filled),
+      //     label: 'Home',
+      //     activeIcon: Icon(Icons.home_filled),
+      //   ),
+      //   BottomNavigationBarItem(
+      //     icon: Icon(Icons.home_filled),
+      //     label: 'Home',
+      //     activeIcon: Icon(Icons.home_filled),
+      //   ),
+      // ]),
     );
   }
 }

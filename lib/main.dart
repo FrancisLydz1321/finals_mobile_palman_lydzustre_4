@@ -1,3 +1,4 @@
+import 'package:finals_mobile_palman_lydzustre_4/views/details_page.dart';
 import 'package:finals_mobile_palman_lydzustre_4/views/home_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
